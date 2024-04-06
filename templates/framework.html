@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Выбор фреймворка</title>
+           <link rel="stylesheet" href="/static/styles.css">
+        </head>
+    <body>        
+<div class = "box_fr">
+    <div class="child"><h1>{{ question }}</h1></div>
+<div class="child">
+    <form id="questionForm" action="/framework" method="post">
+    <input type="hidden" name="current_question" value="{{ current_question }}">
+    <label class = "radio-label"><input  type="radio" name="answer" value="yes"> Да</label><br>
+    <label class = "radio-label"><input  type="radio" name="answer" value="no"> Нет </label><br>
+    <button class = "element" id="submitFormButton">Ответить</button>
+</form>
+</div>
+</div>
+
+
+    </body>
+</html>

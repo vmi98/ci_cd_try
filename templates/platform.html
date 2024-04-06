@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Выбор платформы</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="box">
+
+<div class="child">
+<table border="1">
+  <tr>
+    <th></th>
+    <th data-column="Amazon Web Service">Amazon Web Service</th>
+    <th data-column="Microsoft Azure">Microsoft Azure</th>
+    <th data-column="Google Cloud Platform">Google Cloud Platform</th>
+    <th data-column="Yandex.Cloud">Yandex.Cloud</th>
+  </tr>
+  <tr>
+    <td> <b>Масштаб потенциального веб-приложения.</b> Память. Выберите Microsoft Azure и Amazon Web Service, если ваш код более ресурсоемок. </td>
+    <td><input type="radio" name="row1" data-column="Amazon Web Service" value="option1"></td>
+    <td><input type="radio" name="row1" data-column="Microsoft Azure" value="option2"></td>
+    <td><input type="radio" name="row1" data-column="Google Cloud Platform" value="option3"></td>
+    <td><input type="radio" name="row1" data-column="Yandex.Cloud" value="option4"></td>
+  </tr>
+  <tr>
+    <td><b>Масштаб потенциального веб-приложения.</b> Размер пакета развертывания и максимально допустимое количество функций. Microsoft Azure позволяет максимальный пакет развертывание и количство функций, минимальный - Yandex.Cloud </td>
+    <td><input type="radio" name="row2" data-column="Amazon Web Service" value="option1"></td>
+    <td><input type="radio" name="row2" data-column="Microsoft Azure" value="option2"></td>
+    <td><input type="radio" name="row2" data-column="Google Cloud Platform" value="option3"></td>
+    <td><input type="radio" name="row2" data-column="Yandex.Cloud" value="option4"></td>
+  </tr>
+  <tr>
+    <td><b>Масштаб потенциального веб-приложения.</b> Максимальное время выполнения функции до тайм-аута. Наибольшее время выполнения функции позволяет премиум план Microsoft Azure </td>
+    <td><input type="radio" name="row3" data-column="Amazon Web Service" value="option1"></td>
+    <td><input type="radio" name="row3" data-column="Microsoft Azure" value="option2"></td>
+    <td><input type="radio" name="row3" data-column="Google Cloud Platform" value="option3"></td>
+    <td><input type="radio" name="row3" data-column="Yandex.Cloud" value="option4"></td>
+  </tr>
+  <tr>
+    <td><b>Фреймворки.</b> При разработке WSGI-приложения или перевода уже существующего в бессерверную выбирете AWS или Yandex.Cloud. При разработке с использованием Serverless framework - AWS </td>
+    <td><input type="radio" name="row4" data-column="Amazon Web Service" value="option1"></td>
+    <td><input type="radio" name="row4" data-column="Microsoft Azure" value="option2"></td>
+    <td><input type="radio" name="row4" data-column="Google Cloud Platform" value="option3"></td>
+    <td><input type="radio" name="row4" data-column="Yandex.Cloud" value="option4"></td>
+  </tr>
+  <tr>
+    <td><b>Опыт  в сфере бессерверной разработки.</b> На входе в серверную раработку рекомендуется использовать AWS или Yandex.Cloud, для более опытных разработчиков Google Cloud  или Microsoft Azure </td>
+    <td><input type="radio" name="row5" data-column="Amazon Web Service" value="option1"></td>
+    <td><input type="radio" name="row5" data-column="Microsoft Azure" value="option2"></td>
+    <td><input type="radio" name="row5" data-column="Google Cloud Platform" value="option3"></td>
+    <td><input type="radio" name="row5" data-column="Yandex.Cloud" value="option4"></td>
+  </tr>
+</table>
+</div>
+
+<div class="child">
+<button id="showSelection">Показать наиболее подходящую платформу</button>
+</div>
+<div class="child"></div>
+<div id="resultContainer"></div>
+</div>
+
+<script>
+    document.getElementById('showSelection').addEventListener('click', function() {
+        var columns = document.querySelectorAll('th[data-column]');
+        var maxCount = 0;
+        var maxColumns = []; 
+        columns.forEach(function(column, index) {
+            var count = 0;
+            var columnName = column.getAttribute('data-column');
+            var radioButtons = document.querySelectorAll('input[type="radio"][data-column="' + columnName + '"]:checked');
+            count = radioButtons.length;
+            console.log("Column:", columnName, "Count:", count);
+            if (count > maxCount) {
+                maxCount = count;
+                maxColumns = [columnName]; 
+            } else if (count === maxCount) {
+                maxColumns.push(columnName); 
+            }
+        });
+        console.log("Max Columns:", maxColumns);
+        var resultText = "Ваш выбор: " + maxColumns.join(', '); 
+        document.getElementById('resultContainer').innerText = resultText;
+    });
+</script>
+
+</body>
+</html>
